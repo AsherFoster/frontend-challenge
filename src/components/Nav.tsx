@@ -1,7 +1,11 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const Nav = () => {
-  return (<h1>This is Nav</h1>);
+  return (<nav>
+    <Link to="/">Home</Link>
+    <Link to="/cart">Cart</Link>
+  </nav>);
 };
 
 export default Nav;

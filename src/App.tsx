@@ -13,8 +13,8 @@ const App = () => {
         <div className="app">
           <Nav />
           <Switch>
-            <Route path="/" component={Products} />
             <Route path="/cart" component={Cart} />
+            <Route path="/" component={Products} />
           </Switch>
         </div>
       </Router>
