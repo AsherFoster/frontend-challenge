@@ -1,21 +1,24 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import CartProvider from './components/CartProvider';
+import Nav from './components/Nav';
 import './App.css';
+import Products from './views/Products';
+import Cart from './views/Cart';
 
 const App = () => {
   return (
-    <div className="App">
-      <p>
-        Welcome to the UNICEF front end test
-        <span aria-label="hand-wave" role="img">
-          👋
-        </span>
-      </p>
-      <p>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </p>
-      <p>Products</p>
-      <p>Cart</p>
-    </div>
+    <CartProvider>
+      <Router>
+        <div className="app">
+          <Nav />
+          <Switch>
+            <Route path="/" component={Products} />
+            <Route path="/cart" component={Cart} />
+          </Switch>
+        </div>
+      </Router>
+    </CartProvider>
   );
 };
 
