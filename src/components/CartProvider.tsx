@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {Product} from '../constants';
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
 }
-
 export interface CartContextValue {
   items: CartItem[];
   add(product: Product, quantity: number): void;
@@ -18,6 +17,8 @@ export const CartContext = React.createContext({});
 CartContext.displayName = 'CartContext';
 
 interface Props extends React.PropsWithChildren<any> {}
+
+const initialItems = loadFromStore();
 
 const CartProvider = (props: Props) => {
   function add(product: Product, quantity: number): void {
@@ -34,21 +35,22 @@ const CartProvider = (props: Props) => {
         if (quantity === 0) {
           const index = items.findIndex(i => i === item);
           items.splice(index, 1);
+
         // Update condition
         } else {
           item.quantity = quantity;
         }
-
-        return items; // TODO Not 100% sure if this will trigger an update if reference equality is the same
-        // return [...items]; // If we need to force it
       } else {
 
         // Create condition
-        return [...items, {
+        items.push({
           product,
           quantity: quantity
-        }]
+        });
       }
+
+      saveStore(items);
+      return [...items]; // We need to create a new array object so react knows to update
     });
   }
   function get(product: Product): CartItem | null {
@@ -57,7 +59,7 @@ const CartProvider = (props: Props) => {
   function remove(product: Product): void {
     set(product, 0);
   }
-  const [cartState, setCartState] = useState<CartItem[]>([]);
+  const [cartState, setCartState] = useState<CartItem[]>(initialItems);
 
   // Wow I hope this works...
   console.log('Render!'); // Easy check if we render too often
@@ -70,5 +72,15 @@ const CartProvider = (props: Props) => {
     {props.children}
   </CartContext.Provider>);
 };
+
+function saveStore(state: CartItem[]): void {
+  localStorage.setItem('cartItems', JSON.stringify(state))
+}
+
+function loadFromStore(): CartItem[] {
+  const raw = localStorage.getItem('cartItems');
+  if (raw) return JSON.parse(raw);
+  else return [];
+}
 
 export default CartProvider;
