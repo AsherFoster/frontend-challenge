@@ -1,0 +1,18 @@
+# No, I didn't steal this from https://github.com/AsherFoster/asherfoster.github.com/blob/source/.travis.yml, what're you talking about??
+language: node_js
+node_js: '12'
+branches:
+  only:
+    - master
+
+script: npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  target_branch: gh-pages
+  local_dir: build
+  on:
+    branch: master

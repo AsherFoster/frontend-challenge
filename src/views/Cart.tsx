@@ -21,6 +21,7 @@ const Cart = () => {
         <span className="flex" />
         <p style={{marginRight: '1em'}}>Cart total: {currency(total)}</p>
         {/* Don't question this line. */}
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className="button" href="#" onClick={() => window.location.href = "https://youtu.be/dQw4w9WgXcQ"}>Checkout</a>
       </div>
     </div>)}
