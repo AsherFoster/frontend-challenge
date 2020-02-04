@@ -1,6 +1,14 @@
 # Unicef Front End Template 🦄🚀
 
-< add documentation here >
+**this is definitely not last minute documentation and I definitely did not forget about this**
+
+## Installing
+Install dependencies with `$ npm install`
+
+## Developing
+Start a dev server with `$ npm start`
+- Router views are located in './src/views' and general components are in `./src/components` 
+- Mock items are found in `./src/constants.ts`
 
 ---
 
