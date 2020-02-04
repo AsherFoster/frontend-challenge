@@ -15,7 +15,15 @@ export interface CartContextValue {
   remove(product: Product): void;
 }
 
-export const CartContext = React.createContext({});
+export const CartContext = React.createContext<CartContextValue>({
+  items: [],
+  total: 0,
+  itemCount: 0,
+  add() {},
+  set() {},
+  get(): null {return null},
+  remove() {}
+});
 CartContext.displayName = 'CartContext';
 
 interface Props extends React.PropsWithChildren<any> {}
@@ -28,7 +36,6 @@ const CartProvider = (props: Props) => {
     set(product, item ? (item.quantity + quantity) : quantity); // Either add to existing quantity, or set to the quantity
   }
   function set(product: Product, quantity: number): void {
-    console.log(`Setting ${product.name} to ${quantity}`);
     setCartState((items) => {
       const item = items.find(i => i.product.name === product.name); // Use items instead of cartState so atomic ops perform right
       if (item) {
@@ -64,7 +71,6 @@ const CartProvider = (props: Props) => {
   const [cartState, setCartState] = useState<CartItem[]>(initialItems);
 
   // Wow I hope this works...
-  console.log('Render!'); // Easy check if we render too often
   const val: CartContextValue = {
     items: cartState,
     total: cartState.reduce((a, c) => a + (c.product.price * c.quantity), 0),
