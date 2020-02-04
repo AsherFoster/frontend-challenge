@@ -6,7 +6,15 @@ interface CartItem {
   quantity: number;
 }
 
-const CartContext = React.createContext({});
+export interface CartContextValue {
+  items: CartItem[];
+  add(product: Product, quantity: number): void;
+  set(product: Product, quantity: number): void;
+  get(product: Product): CartItem | null;
+  remove(product: Product): void;
+}
+
+export const CartContext = React.createContext({});
 CartContext.displayName = 'CartContext';
 
 interface Props extends React.PropsWithChildren<any> {}
@@ -17,12 +25,25 @@ const CartProvider = (props: Props) => {
     set(product, item ? (item.quantity + quantity) : quantity); // Either add to existing quantity, or set to the quantity
   }
   function set(product: Product, quantity: number): void {
+    console.log(`Setting ${product.name} to ${quantity}`);
     setCartState((items) => {
       const item = items.find(i => i.product.name === product.name); // Use items instead of cartState so atomic ops perform right
       if (item) {
-        item.quantity = quantity;
+
+        // Remove condition
+        if (quantity === 0) {
+          const index = items.findIndex(i => i === item);
+          items.splice(index, 1);
+        // Update condition
+        } else {
+          item.quantity = quantity;
+        }
+
         return items; // TODO Not 100% sure if this will trigger an update if reference equality is the same
+        // return [...items]; // If we need to force it
       } else {
+
+        // Create condition
         return [...items, {
           product,
           quantity: quantity
@@ -40,7 +61,7 @@ const CartProvider = (props: Props) => {
 
   // Wow I hope this works...
   console.log('Render!'); // Easy check if we render too often
-  const val = {
+  const val: CartContextValue = {
     items: cartState,
     add, set, get, remove
   };

@@ -12,3 +12,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Quick helper classes to make flexboxes easy */
+.flexWrap {
+  display: flex;
+}
+.flex {
+  flex: 1;
+}

@@ -9,7 +9,7 @@ const Products = () => {
     <i>"We'll take your money, at a discount!"</i>
     <ul className="productList">
       {products.map(product => {
-        return (<li><ProductListing product={product} /></li>)
+        return (<li key={product.name}><ProductListing product={product} /></li>)
       })}
     </ul>
   </div>);
