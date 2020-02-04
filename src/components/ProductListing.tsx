@@ -9,7 +9,7 @@ interface Props {
 
 const ProductListing = (props: Props) => {
   return (<CartContext.Consumer>
-    {({add}: any) => (<div className="flexWrap"> {/* We don't seem to be able to type it without TypeScript complaining :( */}
+    {({add}: any) => (<div className="flexWrap alignCenter"> {/* We don't seem to be able to type it without TypeScript complaining :( */}
       <div>
         <p>{props.product.name}</p>
         <i>{currency(props.product.price)}</i>

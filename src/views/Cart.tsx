@@ -12,8 +12,8 @@ const Cart = () => {
           <button onClick={() => remove(item.product)}>Remove</button>
           <p>{item.product.name}</p>
           <span className="flex" />
-          <input type="number" value={item.quantity} onChange={(e) => set(item.product, e.target.value)}/>
-          <i style={{minWidth: '5em', textAlign: 'right'}}>{currency(item.quantity * item.product.price)}</i>
+          <input type="number" value={item.quantity} onChange={(e) => set(item.product, +e.target.value)}/>
+          <i className="cartItemTotal">{currency(item.quantity * item.product.price)}</i>
         </li>))}
       </ul>
 

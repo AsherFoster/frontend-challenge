@@ -6,3 +6,8 @@
 .cartItems li {
   align-items: center;
 }
+
+.cartItemTotal {
+  min-width: 5em;
+  text-align: right;
+}

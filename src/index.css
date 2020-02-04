@@ -17,6 +17,9 @@ code {
 .flexWrap {
   display: flex;
 }
+.alignCenter {
+  align-items: center;
+}
 .flex {
   flex: 1;
 }

@@ -8,6 +8,7 @@ export interface CartItem {
 export interface CartContextValue {
   items: CartItem[];
   total: number;
+  itemCount: number;
   add(product: Product, quantity: number): void;
   set(product: Product, quantity: number): void;
   get(product: Product): CartItem | null;
@@ -67,6 +68,7 @@ const CartProvider = (props: Props) => {
   const val: CartContextValue = {
     items: cartState,
     total: cartState.reduce((a, c) => a + (c.product.price * c.quantity), 0),
+    itemCount: cartState.reduce((a, c) => a + c.quantity, 0),
     add, set, get, remove
   };
 

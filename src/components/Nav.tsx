@@ -4,10 +4,10 @@ import {CartContext} from './CartProvider';
 
 const Nav = () => {
   return (<CartContext.Consumer>
-    {({items}: any) => (<nav className="flexWrap" style={{padding: '1em 0'}}>
+    {({itemCount}: any) => (<nav className="flexWrap" style={{padding: '1em 0'}}>
       <Link to="/">Home</Link>
       <span className="flex" />
-      <Link to="/cart">Cart{items.length ? ` (${items.length})` : ''}</Link>
+      <Link to="/cart">Cart{itemCount ? ` (${itemCount})` : ''}</Link>
     </nav>)}
   </CartContext.Consumer>);
 };
