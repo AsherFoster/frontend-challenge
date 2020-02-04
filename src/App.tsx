@@ -6,10 +6,12 @@ import './App.css';
 import Products from './views/Products';
 import Cart from './views/Cart';
 
+const BASE = process.env.NODE_ENV === 'production' ? require('../package.json').homepage : '';
+
 const App = () => {
   return (
     <CartProvider>
-      <Router>
+      <Router basename={BASE}>
         <div className="app">
           <Nav />
           <Switch>
