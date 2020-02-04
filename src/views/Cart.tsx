@@ -16,7 +16,13 @@ const Cart = () => {
           <i style={{minWidth: '5em', textAlign: 'right'}}>{currency(item.quantity * item.product.price)}</i>
         </li>))}
       </ul>
-      <p>Cart total: {currency(total)}</p>
+
+      <div className="flexWrap">
+        <span className="flex" />
+        <p style={{marginRight: '1em'}}>Cart total: {currency(total)}</p>
+        {/* Don't question this line. */}
+        <a className="button" href="#" onClick={() => window.location.href = "https://youtu.be/dQw4w9WgXcQ"}>Checkout</a>
+      </div>
     </div>)}
   </CartContext.Consumer>)
 };
